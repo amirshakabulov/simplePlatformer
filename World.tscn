@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Terrain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World.gd" type="Script" id=3]
+[ext_resource path="res://assets/heart pixel art 48x48.png" type="Texture" id=4]
+[ext_resource path="res://Diamond.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Tiles/key.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 450, 56 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="KillPlane" type="Area2D" parent="."]
+position = Vector2( 600, 600 )
+scale = Vector2( 3, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillPlane"]
+position = Vector2( 151.667, -1 )
+shape = SubResource( 1 )
+
+[node name="Terrain" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 3, 3 )
+cell_size = Vector2( 18, 18 )
+show_collision = true
+tile_data = PoolIntArray( 0, 0, 131079, 65536, 0, 131079, 131072, 0, 131079, 131087, 0, 14, 131088, 0, 14, 196608, 0, 131079, 196625, 0, 14, 196626, 0, 14, 262144, 0, 131079, 262154, 0, 13, 262155, 0, 13, 262156, 0, 13, 262157, 0, 13, 262166, 0, 18, 262167, 0, 18, 262168, 0, 18, 327680, 0, 131079, 327702, 0, 131090, 327703, 0, 262161, 327704, 0, 131090, 393216, 0, 131079, 393223, 0, 393224, 393226, 0, 458757, 393239, 0, 196620, 393249, 0, 9, 458752, 0, 65538, 458753, 0, 65538, 458754, 0, 65538, 458755, 0, 65538, 458756, 0, 65538, 458757, 0, 65538, 458758, 0, 65538, 458759, 0, 65538, 458760, 0, 65538, 458761, 0, 65538, 458762, 0, 65538, 458773, 0, 262146, 458774, 0, 262146, 458775, 0, 262146, 458776, 0, 262146, 458785, 0, 327689, 524288, 0, 393218, 524289, 0, 393218, 524290, 0, 393218, 524291, 0, 393218, 524292, 0, 393218, 524293, 0, 393218, 524294, 0, 393218, 524295, 0, 393218, 524296, 0, 393218, 524297, 0, 4, 524298, 0, 5, 524309, 0, 196621, 524310, 0, 196621, 524311, 0, 196621, 524312, 0, 196621, 524319, 0, 65538, 524320, 0, 65538, 524321, 0, 65538, 524322, 0, 65538, 589824, 0, 65549, 589825, 0, 65549, 589826, 0, 65549, 589827, 0, 65549, 589828, 0, 65549, 589829, 0, 65549, 589830, 0, 65549, 589831, 0, 65549, 589832, 0, 9, 589833, 0, 9, 589834, 0, 9, 589845, 0, 196621, 589846, 0, 196621, 589847, 0, 196621, 589848, 0, 196621, 589855, 0, 65540, 589856, 0, 65541, 589857, 0, 65540, 589858, 0, 65541, 655360, 0, 393218, 655361, 0, 393218, 655362, 0, 393218, 655363, 0, 393218, 655364, 0, 393218, 655365, 0, 393218, 655366, 0, 393218, 655367, 0, 393218, 655368, 0, 393218, 655369, 0, 393218, 655370, 0, 393218, 655381, 0, 196621, 655382, 0, 196621, 655383, 0, 196621, 655384, 0, 196621, 655391, 0, 65540, 655392, 0, 65541, 655393, 0, 65540, 655394, 0, 65541 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 117, 257 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_bottom = 600
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.4
+drag_margin_right = 0.4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Player/Camera2D"]
+position = Vector2( -33, -256 )
+
+[node name="life1" type="Sprite" parent="Player/Camera2D/StaticBody2D"]
+position = Vector2( 1, 152 )
+scale = Vector2( 0.591667, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="life2" type="Sprite" parent="Player/Camera2D/StaticBody2D"]
+position = Vector2( 35, 152 )
+scale = Vector2( 0.6, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="life3" type="Sprite" parent="Player/Camera2D/StaticBody2D"]
+position = Vector2( 69, 151 )
+scale = Vector2( 0.6, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Player/Camera2D"]
+margin_left = -39.0
+margin_top = -168.0
+margin_right = 42.0
+margin_bottom = -129.0
+custom_fonts/font = SubResource( 4 )
+text = "Diamonds Count: 0"
+
+[node name="Key" type="Area2D" parent="."]
+position = Vector2( 1812, 306.5 )
+scale = Vector2( 1.88889, 2.72222 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Key"]
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key"]
+shape = SubResource( 3 )
+
+[node name="goal" type="Label" parent="."]
+margin_left = 1630.0
+margin_top = 223.0
+margin_right = 1954.0
+margin_bottom = 262.0
+custom_fonts/font = SubResource( 4 )
+text = "Touch ME to Win!"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Diamond" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 468, 357 )
+
+[node name="Diamond2" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 980, 141 )
+
+[node name="Diamond3" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 582, 195 )
+
+[node name="Diamond4" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 468, 354 )
+
+[connection signal="body_entered" from="KillPlane" to="." method="_on_KillPlane_body_entered"]
+[connection signal="body_entered" from="Key" to="." method="_on_Key_body_entered"]
+[connection signal="diamond_collected" from="Node2D/Diamond" to="." method="_on_Diamond_diamond_collected"]
+[connection signal="diamond_collected" from="Node2D/Diamond2" to="." method="_on_Diamond_diamond_collected"]
+[connection signal="diamond_collected" from="Node2D/Diamond3" to="." method="_on_Diamond_diamond_collected"]
+[connection signal="diamond_collected" from="Node2D/Diamond4" to="." method="_on_Diamond_diamond_collected"]
